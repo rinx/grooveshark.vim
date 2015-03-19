@@ -9,6 +9,7 @@ Dependencies
 * Vim (build with '+ruby')
 * Ruby
 * grooveshark gem (https://github.com/sosedoff/grooveshark)
+* Unite.vim (https://github.com/Shougo/unite.vim)
 * mplayer
 
 
