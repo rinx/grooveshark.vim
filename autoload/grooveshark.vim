@@ -45,6 +45,7 @@ endfunction
 
 if has("ruby")
     function! grooveshark#search_song(query)
+        let songs = []
         ruby << EOF
             require 'grooveshark'
 
@@ -52,9 +53,12 @@ if has("ruby")
             client = Grooveshark::Client.new
             songs = client.search_songs(query)
 
-            VIM.command('let res = "' + songs.first.to_s + '"')
+            songs.each do |s|
+                slist = "#{s.id},,, #{s.name},,, #{s.artist}"
+                VIM.command('call add(songs, "' + slist + '")')
+            end
 EOF
-        return res
+        return songs
     endfunction
     function! grooveshark#get_song_url_by_id(id)
         ruby << EOF
