@@ -20,3 +20,10 @@ License
 ---
 
 
+References
+---
+
+* https://github.com/supermomonga/jazzradio.vim
+* https://github.com/vim-jp/vital.vim
+* https://github.com/sosedoff/grooveshark
+
