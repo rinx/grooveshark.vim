@@ -18,6 +18,7 @@ Usage
 
 License
 ---
+MIT License
 
 
 References
