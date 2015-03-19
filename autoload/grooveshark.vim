@@ -54,8 +54,8 @@ if has("ruby")
             songs = client.search_songs(query)
 
             songs.each do |s|
-                slist = "#{s.id},,, #{s.name},,, #{s.artist}"
-                VIM.command('call add(songs, "' + slist + '")')
+                slist = "{'id': '#{s.id}', 'name': '#{s.name}', 'artist': '#{s.artist}', 'album': '#{s.album}'}"
+                VIM.command("call add(songs, #{slist})")
             end
 EOF
         return songs
