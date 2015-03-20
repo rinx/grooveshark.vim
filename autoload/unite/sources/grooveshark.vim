@@ -23,8 +23,13 @@ function! s:source.action_table.play.func(candidate)
   call grooveshark#play(a:candidate.action__song_id)
 endfunction
 
-function! s:source.gather_candidates(args, context)
-  let songs = grooveshark#search_song(a:args[0])
+function! s:source.change_candidates(args, context)
+  let word = matchstr(a:context.input, '^\S\+')
+  if word == ''
+      return []
+  endif
+
+  let songs = grooveshark#search_song(word)
   let max_name_len = max(map(copy(songs), 'len(v:val["name"])'))
   let format = '%-' . max_name_len . 's - %s (%s)'
   let a:context.source.unite__cached_candidates = []
