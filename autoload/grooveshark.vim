@@ -6,14 +6,19 @@ let s:PM = s:V.import('ProcessManager')
 
 
 " Player
-function! grooveshark#play(key)
+function! grooveshark#play(key, detail)
   if executable('mplayer')
     if s:PM.is_available()
       let songurl = grooveshark#get_song_url_by_id(a:key)
+      if a:detail == ''
+        let songdetail = 'Grooveshark music'
+      else
+        let songdetail = a:detail
+      endif
       let play_command = substitute(g:grooveshark#play_command, '%%URL%%', songurl, '')
       call grooveshark#stop()
       call s:PM.touch('grooveshark_play', play_command)
-      echo 'Playing ' . '.'
+      echo 'Playing ' . songdetail . '.'
     else
       echo 'Error: vimproc is unavailable.'
     endif

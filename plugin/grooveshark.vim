@@ -13,7 +13,7 @@ set cpo&vim
 
 if has("ruby")
 
-    command! -nargs=1 GroovesharkPlay call grooveshark#play(<f-args>)
+    command! -nargs=1 GroovesharkPlay call grooveshark#play(<f-args>, '')
     command! GroovesharkStop call grooveshark#stop()
 
     augroup Grooveshark

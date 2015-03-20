@@ -20,7 +20,8 @@ let s:source = {
       \ }
 
 function! s:source.action_table.play.func(candidate)
-  call grooveshark#play(a:candidate.action__song_id)
+  let songdetail = substitute(a:candidate.word, '\s\+', ' ', 'g')
+  call grooveshark#play(a:candidate.action__song_id, songdetail)
 endfunction
 
 function! s:source.gather_candidates(args, context)
