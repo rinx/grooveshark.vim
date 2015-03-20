@@ -1,7 +1,7 @@
 " grooveshark.vim
 " Version: 0.0.1
 " Author: Rintaro Okamura
-" License: 
+" License: MIT
 
 if exists('g:loaded_grooveshark')
   finish
