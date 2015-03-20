@@ -20,7 +20,7 @@ Usage
 
 * `:GroovesharkPlay <song_id>` : Play the song.
 * `:GroovesharkStop` : Stop the song.
-* `:Unite grooveshark:<search word>` : Search songs.
+* `:Unite grooveshark` : Search songs with Unite interface.
 
 
 License
