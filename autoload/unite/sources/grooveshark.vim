@@ -26,10 +26,10 @@ endfunction
 function! s:source.gather_candidates(args, context)
   let songs = grooveshark#search_song(a:args[0])
   let max_name_len = max(map(copy(songs), 'len(v:val["name"])'))
-  let format = '%-' . max_name_len . 's - %s'
+  let format = '%-' . max_name_len . 's - %s (%s)'
   let a:context.source.unite__cached_candidates = []
   return map(songs, '{
-        \   "word" : printf(format, v:val["name"], v:val["artist"]),
+        \   "word" : printf(format, v:val["name"], v:val["artist"], v:val["album"]),
         \   "action__song_id" : v:val["id"],
         \ }')
 endfunction
