@@ -1,0 +1,24 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    grooveshark (0.2.14)
+      json (>= 1.4.6)
+      rest-client (>= 1.5.1)
+      uuid (~> 2.0)
+    json (1.8.2)
+    macaddr (1.7.1)
+      systemu (~> 2.6.2)
+    mime-types (2.4.3)
+    netrc (0.10.3)
+    rest-client (1.7.3)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
+    systemu (2.6.5)
+    uuid (2.3.7)
+      macaddr (~> 1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  grooveshark
