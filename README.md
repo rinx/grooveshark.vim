@@ -18,7 +18,9 @@ The versions of Ruby and Vim Ruby interface should be same.
 Usage
 ---
 
-
+* `:GroovesharkPlay <song_id>` : Play the song.
+* `:GroovesharkStop` : Stop the song.
+* `:Unite grooveshark:<search word> : Search songs.
 
 
 License
