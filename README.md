@@ -13,9 +13,12 @@ Dependencies
 * mplayer
 
 The versions of Ruby and Vim Ruby interface should be same.
+`$GEM_HOME` should be set correct path.
 
 Usage
 ---
+
+
 
 
 License

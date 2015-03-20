@@ -76,7 +76,9 @@ EOF
         call grooveshark#createsession()
         ruby << EOF
             id = VIM.evaluate('a:id').to_s.force_encoding(Encoding::UTF_8)
-            songurl = $client.get_song_url_by_id(id)
+            begin
+                songurl = $client.get_song_url_by_id(id)
+            end
 
             VIM.command('let res = "' + songurl + '"')
 EOF
