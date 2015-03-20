@@ -12,6 +12,7 @@ Dependencies
 * Unite.vim (https://github.com/Shougo/unite.vim)
 * mplayer
 
+The versions of Ruby and Vim Ruby interface should be same.
 
 Usage
 ---
