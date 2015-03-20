@@ -68,7 +68,9 @@ EOF
         let songs = []
         ruby << EOF
             query = VIM.evaluate('a:query').force_encoding(Encoding::UTF_8)
-            songs = $client.search_songs(query)
+            begin
+                songs = $client.search_songs(query)
+            end
 
             songs.each do |s|
                 slist = "{'id': '#{s.id}', 'name': '#{s.name.gsub("'", "''")}', 'artist': '#{s.artist.gsub("'", "''")}', 'album': '#{s.album.gsub("'", "''")}'}"
