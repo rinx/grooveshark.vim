@@ -66,7 +66,7 @@ EOF
             songs = $client.search_songs(query)
 
             songs.each do |s|
-                slist = "{'id': '#{s.id}', 'name': '#{s.name}', 'artist': '#{s.artist}', 'album': '#{s.album}'}"
+                slist = "{'id': '#{s.id}', 'name': '#{s.name.gsub("'", "''")}', 'artist': '#{s.artist.gsub("'", "''")}', 'album': '#{s.album.gsub("'", "''")}'}"
                 VIM.command("call add(songs, #{slist})")
             end
 EOF
