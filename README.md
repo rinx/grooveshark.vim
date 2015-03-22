@@ -22,7 +22,7 @@ Usage
 * `:Unite grooveshark` : Search songs with Unite interface.
 
 
-Config
+Configuration
 ---
 
 You can choose which `ruby` command will be used in this plugin by adding like below in `~/.vimrc`.
