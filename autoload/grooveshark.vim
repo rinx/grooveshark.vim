@@ -1,9 +1,28 @@
-
-
 " Load vital modules
 let s:V = vital#of('grooveshark')
 let s:PM = s:V.import('ProcessManager')
+let s:SF = s:V.import('System.Filepath')
 
+" config
+let g:grooveshark#ruby_cmd_path = get(g:, 'grooveshark#ruby_cmd_path', 'ruby')
+let g:grooveshark#process_wait_sec = get(g:, 'grooveshark#process_wait_sec', '3.0')
+let g:grooveshark#play_command = get(g:, 'grooveshark#play_command', "mplayer -slave -really-quiet %%URL%%")
+
+" helper scripts
+let s:ruby_path_search_songs = printf(
+            \ '%s%s%s%ssearch_song.rb',
+            \ expand('<sfile>:p:h'),
+            \ s:SF.separator(),
+            \ 'ruby',
+            \ s:SF.separator()
+            \)
+let s:ruby_path_get_song_url_by_id = printf(
+            \ '%s%s%s%sget_song_url_by_id.rb',
+            \ expand('<sfile>:p:h'),
+            \ s:SF.separator(),
+            \ 'ruby',
+            \ s:SF.separator()
+            \)
 
 " Player
 function! grooveshark#play(key, detail)
@@ -48,52 +67,45 @@ function! grooveshark#stop()
   endif
 endfunction
 
-if has("ruby")
-    function! grooveshark#createsession(...)
-        if g:grooveshark#session
-            " Nothing to do
+function! grooveshark#search_song(query)
+    if s:PM.is_available()
+        if executable(g:grooveshark#ruby_cmd_path)
+            let cmd = [g:grooveshark#ruby_cmd_path, s:ruby_path_search_songs, a:query]
+            let t = s:PM.touch('grooveshark_search_songs', cmd)
+            if t !=# 'new'
+                call s:PM.kill('grooveshark_search_songs')
+                call s:PM.touch('grooveshark_search_songs', cmd)
+            endif
+            let [out, err, type] = s:PM.read_wait('grooveshark_search_songs', g:grooveshark#process_wait_sec, [])
+            if type ==# 'inactive'
+                call s:PM.term('grooveshark_search_songs')
+                throw 'ruby had died...!'
+            endif
+            let songs = map(split(out, "\r\\?\n"), 'eval(v:val)')
+            return songs
         else
-            " create session
-            ruby << EOF
-            require 'grooveshark'
-
-            $client = Grooveshark::Client.new
-EOF
-
-            let g:grooveshark#session = 1
+            echo 'Error: ruby does not exist in ''' . g:grooveshark#ruby_cmd_path . '''.'
         endif
-    endfunction
-    function! grooveshark#search_song(query)
-        call grooveshark#createsession()
-        let songs = []
-        ruby << EOF
-            query = VIM.evaluate('a:query').force_encoding(Encoding::UTF_8)
-            begin
-                songs = $client.search_songs(query)
-            end
-
-            songs.each do |s|
-                slist = "{'id': '#{s.id}', 'name': '#{s.name.gsub("'", "''")}', 'artist': '#{s.artist.gsub("'", "''")}', 'album': '#{s.album.gsub("'", "''")}'}"
-                VIM.command("call add(songs, #{slist})")
-            end
-EOF
-        return songs
-    endfunction
-    function! grooveshark#get_song_url_by_id(id)
-        call grooveshark#createsession()
-        ruby << EOF
-            id = VIM.evaluate('a:id').to_s.force_encoding(Encoding::UTF_8)
-            begin
-                songurl = $client.get_song_url_by_id(id)
-            end
-
-            VIM.command('let res = "' + songurl + '"')
-EOF
-        return res
-    endfunction
-endif
-
-
-let g:grooveshark#session = 0
-let g:grooveshark#play_command = get(g:, 'grooveshark#play_command', "mplayer -slave -really-quiet %%URL%%")
+    else
+        echo 'Error: vimproc is unavailable.'
+    endif
+endfunction
+function! grooveshark#get_song_url_by_id(id)
+    if s:PM.is_available()
+        if executable(g:grooveshark#ruby_cmd_path)
+            let cmd = [g:grooveshark#ruby_cmd_path, s:ruby_path_get_song_url_by_id, a:id]
+            call s:PM.touch('grooveshark_get_song_url', cmd)
+            let [out, err, type] = s:PM.read_wait('grooveshark_get_song_url', g:grooveshark#process_wait_sec, [])
+            if type ==# 'inactive'
+                call s:PM.term('grooveshark_get_song_url')
+                throw 'ruby had died...!'
+            endif
+            return out
+        else
+            echo 'Error: ruby does not exist in ''' . g:grooveshark#ruby_cmd_path . '''.'
+        endif
+    else
+        echo 'Error: vimproc is unavailable.'
+    endif
+endfunction
 

@@ -6,13 +6,12 @@ You can enjoy grooveshark music with Vim.
 Dependencies
 ---
 
-* Vim (build with '+ruby')
+* Vim
 * Ruby
 * grooveshark gem (https://github.com/sosedoff/grooveshark)
 * Unite.vim (https://github.com/Shougo/unite.vim)
 * mplayer
 
-The versions of Ruby and Vim Ruby interface should be same.  
 `$GEM_HOME` should be set correct path.
 
 Usage
@@ -21,6 +20,14 @@ Usage
 * `:GroovesharkPlay <song_id>` : Play the song.
 * `:GroovesharkStop` : Stop the song.
 * `:Unite grooveshark` : Search songs with Unite interface.
+
+
+Config
+---
+
+You can choose which `ruby` command will be used in this plugin by adding like below in `~/.vimrc`.
+
+    let g:grooveshark#ruby_cmd_path = expand('$HOME/.rbenv/shims/ruby')
 
 
 License

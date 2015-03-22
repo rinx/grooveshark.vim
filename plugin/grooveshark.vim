@@ -11,17 +11,13 @@ let g:loaded_grooveshark= 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-if has("ruby")
+command! -nargs=1 GroovesharkPlay call grooveshark#play(<f-args>, '')
+command! GroovesharkStop call grooveshark#stop()
 
-    command! -nargs=1 GroovesharkPlay call grooveshark#play(<f-args>, '')
-    command! GroovesharkStop call grooveshark#stop()
-
-    augroup Grooveshark
-        autocmd!
-        autocmd Grooveshark VimLeave * call grooveshark#stop()
-    augroup END
-
-endif
+augroup Grooveshark
+    autocmd!
+    autocmd Grooveshark VimLeave * call grooveshark#stop()
+augroup END
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
