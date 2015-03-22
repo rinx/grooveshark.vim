@@ -100,6 +100,7 @@ function! grooveshark#get_song_url_by_id(id)
                 call s:PM.term('grooveshark_get_song_url')
                 throw 'ruby had died...!'
             endif
+            call s:PM.term('grooveshark_get_song_url')
             return out
         else
             echo 'Error: ruby does not exist in ''' . g:grooveshark#ruby_cmd_path . '''.'
