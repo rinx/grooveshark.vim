@@ -5,7 +5,7 @@ let s:SF = s:V.import('System.Filepath')
 
 " config
 let g:grooveshark#ruby_cmd_path = get(g:, 'grooveshark#ruby_cmd_path', 'ruby')
-let g:grooveshark#process_wait_sec = get(g:, 'grooveshark#process_wait_sec', '3.0')
+let g:grooveshark#process_wait_sec = get(g:, 'grooveshark#process_wait_sec', '5.0')
 let g:grooveshark#play_command = get(g:, 'grooveshark#play_command', "mplayer -slave -really-quiet %%URL%%")
 
 " helper scripts
@@ -76,7 +76,7 @@ function! grooveshark#search_song(query)
                 call s:PM.kill('grooveshark_search_songs')
                 call s:PM.touch('grooveshark_search_songs', cmd)
             endif
-            let [out, err, type] = s:PM.read_wait('grooveshark_search_songs', g:grooveshark#process_wait_sec, [])
+            let [out, err, type] = s:PM.read_wait('grooveshark_search_songs', g:grooveshark#process_wait_sec, ['$'])
             if type ==# 'inactive'
                 call s:PM.term('grooveshark_search_songs')
                 throw 'ruby had died...!'
@@ -95,7 +95,7 @@ function! grooveshark#get_song_url_by_id(id)
         if executable(g:grooveshark#ruby_cmd_path)
             let cmd = [g:grooveshark#ruby_cmd_path, s:ruby_path_get_song_url_by_id, a:id]
             call s:PM.touch('grooveshark_get_song_url', cmd)
-            let [out, err, type] = s:PM.read_wait('grooveshark_get_song_url', g:grooveshark#process_wait_sec, [])
+            let [out, err, type] = s:PM.read_wait('grooveshark_get_song_url', g:grooveshark#process_wait_sec, ['$'])
             if type ==# 'inactive'
                 call s:PM.term('grooveshark_get_song_url')
                 throw 'ruby had died...!'
