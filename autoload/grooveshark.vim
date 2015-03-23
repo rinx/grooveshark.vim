@@ -67,6 +67,29 @@ function! grooveshark#stop()
   endif
 endfunction
 
+" format functions for unite
+function! grooveshark#get_str_disp_len(str)
+    let stdlen = len(a:str)
+    let mltlen = len(substitute(a:str, '.', 'x', 'g'))
+    if stdlen != mltlen
+        return stdlen - ((stdlen - mltlen) / 2)
+    else
+        return stdlen
+    endif
+endfunction
+
+function!grooveshark#name_formatter(name, max_name_len)
+    let stdlen = len(a:name)
+    let mltlen = len(substitute(a:name, '.', 'x', 'g'))
+    if stdlen != mltlen
+        let ret_len = ((stdlen - mltlen) / 2) + a:max_name_len
+    else
+        let ret_len = a:max_name_len
+    endif
+    return '%-' . ret_len . 's - %s (%s)'
+endfunction
+
+" Using Ruby functions
 function! grooveshark#search_song(query)
     if s:PM.is_available()
         if executable(g:grooveshark#ruby_cmd_path)
@@ -90,6 +113,7 @@ function! grooveshark#search_song(query)
         echo 'Error: vimproc is unavailable.'
     endif
 endfunction
+
 function! grooveshark#get_song_url_by_id(id)
     if s:PM.is_available()
         if executable(g:grooveshark#ruby_cmd_path)
