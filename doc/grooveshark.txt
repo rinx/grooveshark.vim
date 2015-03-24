@@ -1,0 +1,51 @@
+*grooveshark.txt*	You can play musics in grooveshark.com.
+
+Version: 0.0.1
+Author: Rintaro Okamura <rintaro.okamura@gmail.com>
+License: MIT License
+
+CONTENTS				*grooveshark-contents*
+
+	Install				|grooveshark-install|
+	Usage				|grooveshark-usage|
+	Configurations			|grooveshark-configurations|
+	References			|grooveshark-references|
+
+==============================================================================
+INSTALL					*grooveshark-install*
+
+	I recommend to use some plugin managers to install this plugin.
+	For example, you can use neobundle.vim as below.
+>
+		NeoBundleLazy 'rinx/grooveshark.vim',
+			\ { 'depends' : 'Shougo/unite.vim' }
+		if neobundle#tap('grooveshark.vim')
+			call neobundle#config({
+				\ 'autoload' : {
+				\   'unite_sources' : [
+				\     'grooveshark',
+				\   ],
+				\   'commands' : [
+				\     'GroovesharkPlay',
+				\     'GroovesharkStop',
+				\   ],
+				\   'function_prefix' : 'grooveshark',
+				\ }
+				\})
+			call neobundle#untap()
+		endif
+<
+
+==============================================================================
+USAGE					*grooveshark-usage*
+
+
+==============================================================================
+CONFIGURATIONS				*grooveshark-configurations*
+
+
+==============================================================================
+REFERENCES				*grooveshark-references*
+
+
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
