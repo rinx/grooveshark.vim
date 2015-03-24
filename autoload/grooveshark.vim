@@ -67,6 +67,18 @@ function! grooveshark#stop()
   endif
 endfunction
 
+function! grooveshark#pause()
+    if grooveshark#is_playing()
+        return s:PM.writeln('grooveshark_play', 'p')
+    endif
+endfunction
+
+function! grooveshark#mute()
+    if grooveshark#is_playing()
+        return s:PM.writeln('grooveshark_play', 'm')
+    endif
+endfunction
+
 " format functions for unite
 function! grooveshark#get_str_disp_len(str)
     let stdlen = len(a:str)

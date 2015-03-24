@@ -14,6 +14,9 @@ set cpo&vim
 command! -nargs=1 GroovesharkPlay call grooveshark#play(<f-args>, '')
 command! GroovesharkStop call grooveshark#stop()
 
+command! GroovesharkPause call grooveshark#pause()
+command! GroovesharkMute call grooveshark#mute()
+
 augroup Grooveshark
     autocmd!
     autocmd Grooveshark VimLeave * call grooveshark#stop()
