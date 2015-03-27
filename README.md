@@ -18,6 +18,8 @@ Usage
 ---
 
 * `:GroovesharkPlay <song_id>` : Play the song.
+* `:GroovesharkPause` : Pause and resume the song.
+* `:GroovesharkMute` : Toggle mute.
 * `:GroovesharkStop` : Stop the song.
 * `:Unite grooveshark` : Search songs with Unite interface.
 
