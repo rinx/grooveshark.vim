@@ -35,17 +35,48 @@ INSTALL					*grooveshark-install*
 			call neobundle#untap()
 		endif
 <
+        You should install unite.vim to use this plugin.
+
+	This plugin requires you to install ruby and grooveshark gem.
 
 ==============================================================================
 USAGE					*grooveshark-usage*
 
+	To listen grooveshark music whose id is [song_id],
+>
+	:GroovesharkPlay [song_id]
+<
+	To pause and resume the playing music,
+>
+	:GroovesharkPause
+<
+	To mute the playing music,
+>
+	:GroovesharkMute
+<
+	To stop the playing music,
+>
+	:GroovesharkStop
+<
+	To search songs with unite interface,
+>
+	:Unite grooveshark
+<
 
 ==============================================================================
 CONFIGURATIONS				*grooveshark-configurations*
 
+	You can specify the `ruby` command for accessing grooveshark
+	unofficial API as below.
+>
+	let g:grooveshark#ruby_cmd_path = expand('$HOME/.rbenv/shims/ruby')
+<
 
 ==============================================================================
 REFERENCES				*grooveshark-references*
+
+	unite.vim:		https://github.com/Shougo/unite.vim
+	grooveshark gem:	https://github.com/sosedoff/grooveshark
 
 
 vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
