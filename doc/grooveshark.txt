@@ -71,6 +71,8 @@ CONFIGURATIONS				*grooveshark-configurations*
 >
 	let g:grooveshark#ruby_cmd_path = expand('$HOME/.rbenv/shims/ruby')
 <
+	`$GEM_HOME` should be set correct path, and `ruby` command version
+	should be the same version as installing gem version.
 
 ==============================================================================
 REFERENCES				*grooveshark-references*
