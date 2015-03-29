@@ -38,6 +38,9 @@ INSTALL					*grooveshark-install*
         You should install unite.vim to use this plugin.
 
 	This plugin requires you to install ruby and grooveshark gem.
+>
+	$ gem install grooveshark
+<
 
 ==============================================================================
 USAGE					*grooveshark-usage*
